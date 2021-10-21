@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import Axios from 'axios'
 import Swal from 'sweetalert2'
 import Navbar2 from './Navbar2'
+
+
 export default function ActualizarProd(props) {
 
     const [nombre, setNombres] = useState('')
@@ -9,16 +11,16 @@ export default function ActualizarProd(props) {
     // const [contrasena, setContrasena] = useState('')
     const [estado, setEstado] = useState([])
     const [estadoSelect, setEstados] = useState('')
-    const [rol, setTrol] = useState([])
-    const [rolselect, setRolselect] = useState('')
+    const [rol, setTrol] = useState([])  // opciones de rol 
+    const [rolselect, setRolselect] = useState([]) //rol seleccionado
  
 
     useEffect(() => {
         obtenerVendedores()
         setTrol(['vendedor', 'administrador'])
-        // setRolselect('vendedor')
+        setRolselect('vendedor')
         setEstado(['inactivo', 'activo'])
-        // setEstados('inactivo')
+        setEstados('inactivo')
 
     }, [])
 
@@ -44,7 +46,7 @@ export default function ActualizarProd(props) {
             nombre,
             correo,
             estado: estadoSelect,
-            trol: rolselect
+            rol: rolselect
         }
 
         const respuesta = await Axios.put('http://localhost:4000/usuario/modificar/' + id, vendedor, {
@@ -84,11 +86,11 @@ export default function ActualizarProd(props) {
                                 <div className="form-group">
                                     <label>Estado</label>
                                     {/* <input type='text' className='form-control' required onChange={(e)=>setEstado(e.target.value)}/> */}
-                                    <select className='form-control' onChange={(e) =>
+                                    <select value = {estadoSelect} className='form-control' onChange={(e) =>
                                         setEstados(e.target.value)}>
                                         {
                                             estado.map(trol => (
-                                                <option key={trol}>
+                                                <option  key={trol}>
                                                     {trol}
                                                 </option>
                                             )
@@ -99,7 +101,7 @@ export default function ActualizarProd(props) {
 
                                 <div className="form-group">
                                     <label>Rol</label>
-                                    <select className='form-control' onChange={(e) =>
+                                    <select value = {rolselect} className='form-control' onChange={(e) =>
                                         setRolselect(e.target.value)}>
                                         {
                                             rol.map(trol => (
@@ -121,6 +123,7 @@ export default function ActualizarProd(props) {
                     </div>
                 </div>
             </div>
+
         </div>
     )
 }

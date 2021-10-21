@@ -238,7 +238,7 @@ export default function MIndexVentas() {
                                                 <td>{venta.nombreCliente}</td>
                                                 <td>{venta.vendedorId}</td>
                                                 <td>{venta.nombreVendedor}</td>
-                                                <td>{venta.nombreVendedor}</td>
+                                                <td>{venta.estado}</td>
                                                 <td>{venta.totalPago}</td>
                                                 <td>
 
