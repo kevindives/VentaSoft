@@ -16,7 +16,7 @@ router.get('/buscar/:nombres',UsuarioCtrl.buscarByName)
 //rutas post
 router.post('/crear',UsuarioCtrl.crearUsuario)
 router.post('/login', UsuarioCtrl.login)
-
+router.post('/loginGoogle', UsuarioCtrl.loginGoogle)
 //rutas put
 router.put('/modificar/:usuarioId',UsuarioCtrl.modificar)
 

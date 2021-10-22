@@ -3,9 +3,14 @@ import { Link } from 'react-router-dom'
 import Navbar2  from './Navbar2'
 
 const MHome = () => {
+    // const estado = sessionStorage.getItem('estado');
+    // const role = sessionStorage.getItem('rol');
+
     return (
         <div>
             <Navbar2/>
+            {/* {estado=='activo' && (role == 'vendedor' || role=='administrador')? <div> */}
+
             <div className = "margen">
             </div>
             <div className="container-fluid">
@@ -15,7 +20,7 @@ const MHome = () => {
                         <div className="card" >
                             <img src="https://res.cloudinary.com/caugustog/image/upload/v1633121314/VentaSoft/registro_de_ventas_y1i6l9.png" className="card-img-top" alt="..."/>
                             <div className ="card-body">
-                            <h5 className ="card-title">ESTADO DE lAS VENTAS</h5>
+                            <h5 className ="card-title">ESTADO DE LAS VENTAS</h5>
                             <p className ="card-text">Consulta el estado de las ventas dando clic en IR.</p>
                             <Link to="/ventas" href="dirige al modal de estado de ventas" className ="btn btn-primary">IR</Link>
                             </div>
@@ -43,7 +48,9 @@ const MHome = () => {
                     </div>
                 </div>
             </div>
+            {/* </div> :<h1>no tienes acceso</h1>} */}
         </div>
+            
     )
 }
 

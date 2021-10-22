@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import Axios from 'axios'
 import Swal from 'sweetalert2'
 import Navbar2  from './Navbar2'
+import Acceso from './Acceso'
 
 export default function Index() {
 
@@ -111,13 +112,14 @@ export default function Index() {
         setVendedores(respuesta.data)
     }
 
-
+    const estado2 = sessionStorage.getItem('estado');
+    const role = sessionStorage.getItem('rol');
     return (
 
         <div>
             <Navbar2/>
             {/*Encabezado titular "Vendedores"*/}
-
+            {estado2=='activo' && role == 'administrador' ?<div>
             <header className='py-2 bg-primary text-white'>
                 <div className="container">
                     <div className="row">
@@ -200,7 +202,7 @@ export default function Index() {
                     </div>
                 </div>
             </section>
-
+            </div> : <Acceso/>     }                     
             {/*Modal para agregar vendedor*/}
             <div className="modal fade" id='addVendedor'>
 

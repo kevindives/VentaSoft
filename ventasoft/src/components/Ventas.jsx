@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import Axios from 'axios'
 import Navbar2 from './Navbar2'
+import Acceso from './Acceso'
 
 export default function MIndexVentas() {
 
@@ -147,118 +148,120 @@ export default function MIndexVentas() {
         console.log(myResult)
     }
 
-
+    const estado2 = sessionStorage.getItem('estado');
+    const role = sessionStorage.getItem('rol');
     return (
         <div>
             <Navbar2 />
-            <header className='py-2 bg-primary text-white'>
-                <div className="container">
-                    <div className="row">
-                        <div className="col-md-6">
-                            <h1><i className="fas fa-pencil-alt"></i>Ventas</h1>
-                        </div>
-                    </div>
-                </div>
-            </header>
-
-            {/* //BUSCAR */}
-
-            <nav className='navbar py-4'>
-                <div className="container">
-                    <div className="col-md-3">
-                        <Link to='#' className="btn btn-primary btn-block" data-toggle='modal' data-toggle='modal' data-target='#addVenta'>
-                            <i className='fas fa-plus'>Agregar Ventas</i>
-                        </Link>
-                    </div>
-                    <div className="col-md-6 ml-auto">
-
-
-                        <div className="col">
-                            <div class="input-group">
-                                <select className="form-select" id="inputGroupSelect01">
-                                    <option selected>Buscar por...</option>
-                                    <option value="1">Identificador de la venta</option>
-                                    <option value="2">Identificación cliente</option>
-                                    <option value="3">Nombre cliente</option>
-                                </select>
-
-                                <input type="text" className="form-control" placeholder="Buscar por" aria-label="Buscar" aria-describedby="button-addon2" onChange={(e) => buscar(e)} />
-                                <button class="btn btn-outline-secondary" type="button" id="button-addon2" onClick={buscar}>Buscar</button>
+            {estado2 == 'activo' && (role == 'vendedor' || role == 'administrador') ? <div>
+                <header className='py-2 bg-primary text-white'>
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-md-6">
+                                <h1><i className="fas fa-pencil-alt"></i>Ventas</h1>
                             </div>
                         </div>
-
                     </div>
+                </header>
+
+                {/* //BUSCAR */}
+
+                <nav className='navbar py-4'>
+                    <div className="container">
+                        <div className="col-md-3">
+                            <Link to='#' className="btn btn-primary btn-block" data-toggle='modal' data-toggle='modal' data-target='#addVenta'>
+                                <i className='fas fa-plus'>Agregar Ventas</i>
+                            </Link>
+                        </div>
+                        <div className="col-md-6 ml-auto">
 
 
+                            <div className="col">
+                                <div class="input-group">
+                                    <select className="form-select" id="inputGroupSelect01">
+                                        <option selected>Buscar por...</option>
+                                        <option value="1">Identificador de la venta</option>
+                                        <option value="2">Identificación cliente</option>
+                                        <option value="3">Nombre cliente</option>
+                                    </select>
 
-                </div>
-            </nav >
-
-
-
-            {/* MOSTRAR EMPLEADOS */}
-            <section>
-                <div class="container-fluid py-md-4">
-                    <div className="row">
-                        <div className="col -md-15">
-                            <div className="card">
-                                <div className="card-header"><h4>Ventas</h4></div>
-
+                                    <input type="text" className="form-control" placeholder="Buscar por" aria-label="Buscar" aria-describedby="button-addon2" onChange={(e) => buscar(e)} />
+                                    <button class="btn btn-outline-secondary" type="button" id="button-addon2" onClick={buscar}>Buscar</button>
+                                </div>
                             </div>
 
-
-                            <table className="table -table-striped card-text">
-                                <thead class="table-dark text-white">
-                                    <tr>
-                                        <th>Fecha</th>
-                                        <th>CódigoProducto</th>
-                                        <th>Cantidad</th>
-                                        <th>Precio Unitario</th>
-                                        <th>Identificación Cliente</th>
-                                        <th>Nombre Cliente</th>
-                                        <th>Identificación vendedor</th>
-                                        <th>Nombre vendedor </th>
-                                        <th>Estado </th>
-                                        <th>Total</th>
-                                        <th>Opciones </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+                        </div>
 
 
 
-                                    {
-                                        ventas.map((venta, i) => (
-                                            <tr key={venta._id} >
-                                                <td>{venta.fecha}</td>
-                                                <td>{venta.codigoProducto}</td>
-                                                <td>{venta.cantidad}</td>
-                                                <td>{venta.precioUni}</td>
-                                                <td>{venta.clienteId}</td>
-                                                <td>{venta.nombreCliente}</td>
-                                                <td>{venta.vendedorId}</td>
-                                                <td>{venta.nombreVendedor}</td>
-                                                <td>{venta.estado}</td>
-                                                <td>{venta.totalPago}</td>
-                                                <td>
-
-                                                    <Link className="btn btn-warning mr-1" to={'/editVentas/' + venta._id}>Editar</Link>
-                                                    <button className="btn btn-danger mr-0" onClick={() => eliminar(venta._id)}>Eliminar</button>
-                                                </td>
-
-                                            </tr>
-                                        ))
-                                    }
-                                </tbody>
-                            </table>
+                    </div>
+                </nav >
 
 
 
+                {/* MOSTRAR EMPLEADOS */}
+                <section>
+                    <div class="container-fluid py-md-4">
+                        <div className="row">
+                            <div className="col -md-15">
+                                <div className="card">
+                                    <div className="card-header"><h4>Ventas</h4></div>
+
+                                </div>
+
+
+                                <table className="table -table-striped card-text">
+                                    <thead class="table-dark text-white">
+                                        <tr>
+                                            <th>Fecha</th>
+                                            <th>CódigoProducto</th>
+                                            <th>Cantidad</th>
+                                            <th>Precio Unitario</th>
+                                            <th>Identificación Cliente</th>
+                                            <th>Nombre Cliente</th>
+                                            <th>Identificación vendedor</th>
+                                            <th>Nombre vendedor </th>
+                                            <th>Estado </th>
+                                            <th>Total</th>
+                                            <th>Opciones </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+
+
+                                        {
+                                            ventas.map((venta, i) => (
+                                                <tr key={venta._id} >
+                                                    <td>{venta.fecha}</td>
+                                                    <td>{venta.codigoProducto}</td>
+                                                    <td>{venta.cantidad}</td>
+                                                    <td>{venta.precioUni}</td>
+                                                    <td>{venta.clienteId}</td>
+                                                    <td>{venta.nombreCliente}</td>
+                                                    <td>{venta.vendedorId}</td>
+                                                    <td>{venta.nombreVendedor}</td>
+                                                    <td>{venta.estado}</td>
+                                                    <td>{venta.totalPago}</td>
+                                                    <td>
+
+                                                        <Link className="btn btn-warning mr-1" to={'/editVentas/' + venta._id}>Editar</Link>
+                                                        <button className="btn btn-danger mr-0" onClick={() => eliminar(venta._id)}>Eliminar</button>
+                                                    </td>
+
+                                                </tr>
+                                            ))
+                                        }
+                                    </tbody>
+                                </table>
+
+
+
+                            </div>
                         </div>
                     </div>
-                </div>
-            </section>
-
+                </section>
+            </div> : <Acceso/>}
 
 
 

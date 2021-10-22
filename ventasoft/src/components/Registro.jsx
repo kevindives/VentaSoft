@@ -24,9 +24,13 @@ export const Registro = () => {
             const token = respuesta.data.token
             const nombre = respuesta.data.nombre
             const idusuario = respuesta.data.id
+            const estado = respuesta.data.estado
+            const rol = respuesta.data.rol
             sessionStorage.setItem('token', token)
             sessionStorage.setItem('nombre', nombre)
             sessionStorage.setItem('idusuario', idusuario)
+            sessionStorage.setItem('estado', estado)
+            sessionStorage.setItem('rol', rol)
             window.location.href = '/home'
         }
     }

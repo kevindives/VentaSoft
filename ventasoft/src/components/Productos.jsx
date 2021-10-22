@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Axios from 'axios'
 import Swal from 'sweetalert2'
-import Navbar2  from './Navbar2'
+import Navbar2 from './Navbar2'
+import Acceso from './Acceso'
 
 export default function Productos() {
 
@@ -11,13 +12,13 @@ export default function Productos() {
     const [descripcion, setDescripcion] = useState('')
     const [nombre, setNombre] = useState('')
     const [cantidad, setCantidad] = useState('')
-    const [precio, setPrecio] =useState('')
-   
+    const [precio, setPrecio] = useState('')
+
 
     useEffect(() => {
         obtenerProductos()
-        
-    },[]
+
+    }, []
     )
 
     /*Obtener/Listar información de "Vendedores"*/
@@ -25,29 +26,29 @@ export default function Productos() {
     const obtenerProductos = async () => {
         // const id = sessionStorage.getItem('idusuario')
         const token = sessionStorage.getItem('token')
-        const res =await Axios.get('http://localhost:4000/producto/listarproducto',
+        const res = await Axios.get('http://localhost:4000/producto/listarproducto',
             {
                 headers: { 'autorizacion': token }
             }
         )
-    
+
         setProductos(res.data)
     }
 
     /*Eliminar vendedor*/
-    const eliminar=async(id)=>{
-        const token=sessionStorage.getItem('token')
-        const respuesta=await Axios.delete('http://localhost:4000/producto/eliminar/'+id,{
-            headers:{'autorizacion':token}
+    const eliminar = async (id) => {
+        const token = sessionStorage.getItem('token')
+        const respuesta = await Axios.delete('http://localhost:4000/producto/eliminar/' + id, {
+            headers: { 'autorizacion': token }
         })
-        const mensaje=respuesta.data.mensaje 
+        const mensaje = respuesta.data.mensaje
         Swal.fire({
-            icon:'success',
-            title:mensaje,
-            showConfirmButton:false, 
-            timer:1500
+            icon: 'success',
+            title: mensaje,
+            showConfirmButton: false,
+            timer: 1500
         })
-        obtenerProductos() 
+        obtenerProductos()
     }
 
     /*Guardar vendedor*/
@@ -80,7 +81,7 @@ export default function Productos() {
         }, 1500)
     }
 
-   
+
 
     const buscar = async (e) => {
         if (e.target.value === '') {
@@ -94,13 +95,14 @@ export default function Productos() {
         setProductos(respuesta.data)
     }
 
-
+    const estado = sessionStorage.getItem('estado');
+    const role = sessionStorage.getItem('rol');
     return (
 
         <div>
-            <Navbar2/>
+            <Navbar2 />
             {/*Encabezado titular "Vendedores"*/}
-
+            {estado=='activo' &&  role=='administrador'? <div>
             <header className='py-2 bg-primary text-white'>
                 <div className="container">
                     <div className="row">
@@ -142,7 +144,7 @@ export default function Productos() {
                                 </div>
                                 <table className='table table-responsive-lg table-striped'>
                                     <thead className='thead-dark'>
-                                        
+
                                         <tr>
                                             <th>#</th>
                                             <th>Nombre del producto</th>
@@ -153,7 +155,7 @@ export default function Productos() {
                                         </tr>
 
                                     </thead>
-                                   
+
                                     <tbody>
                                         {
                                             productos.map((producto, i) => (
@@ -164,8 +166,8 @@ export default function Productos() {
                                                     <td>{producto.precio}</td>
                                                     <td>{producto.cantidad}</td>
                                                     <td>
-                                                        
-                                                        <button className='btn btn-warning mr-1' onClick={()=>eliminar(producto._id)} >Eliminar</button>
+
+                                                        <button className='btn btn-warning mr-1' onClick={() => eliminar(producto._id)} >Eliminar</button>
                                                         <Link className='btn btn-danger mr-1' to={'/editProductos/' + producto._id}>Editar</Link>
                                                     </td>
 
@@ -181,52 +183,52 @@ export default function Productos() {
                     </div>
                 </div>
             </section>
-
+            </div> :<Acceso/>    }                      
             {/*Modal para agregar vendedor*/}
             <div className="modal fade" id='addVendedor'>
 
-            <div className="modal-dialog modal-lg">
-                <div className='modal-content'>
-                     
-                     <div className="modal-header pg-primary text-black">
-                         <h2 className='modal-title'>Agregar Producto </h2>
-                         <button className='close' data-dismiss='modal'>
-                             <span>&times;</span>
-                         </button>
-                     </div>
+                <div className="modal-dialog modal-lg">
+                    <div className='modal-content'>
 
-                     <div className="modal-body">
+                        <div className="modal-header pg-primary text-black">
+                            <h2 className='modal-title'>Agregar Producto </h2>
+                            <button className='close' data-dismiss='modal'>
+                                <span>&times;</span>
+                            </button>
+                        </div>
 
-                        <form onSubmit={guardar}>
-                            <div className="form-group">
-                                <label>Nombre de producto</label>
-                                <input type='text' className='form-control' required onChange={(e)=>setNombre(e.target.value)}/>
-                            </div>
-                            <div className="form-group">
-                                <label> Descripcion </label>
-                                <input type='text' className='form-control' required onChange={(e)=>setDescripcion(e.target.value)}/>
-                            </div>
+                        <div className="modal-body">
 
-                            <div className="form-group">
-                                <label>Cantidad </label>
-                                <input type='number' className='form-control' required onChange={(e)=>setCantidad(e.target.value)}/>
-                            </div>
-                            <div className="form-group">
-                                <label>Precio</label>
-                                <input type='text' className='form-control' required onChange={(e)=>setPrecio(e.target.value)}/>
-                            </div>
+                            <form onSubmit={guardar}>
+                                <div className="form-group">
+                                    <label>Nombre de producto</label>
+                                    <input type='text' className='form-control' required onChange={(e) => setNombre(e.target.value)} />
+                                </div>
+                                <div className="form-group">
+                                    <label> Descripcion </label>
+                                    <input type='text' className='form-control' required onChange={(e) => setDescripcion(e.target.value)} />
+                                </div>
 
-                            <div className='form-group'>
-                                <button className='btn btn-primary' type='submit'>Guardar</button>
-                            </div>
+                                <div className="form-group">
+                                    <label>Cantidad </label>
+                                    <input type='number' className='form-control' required onChange={(e) => setCantidad(e.target.value)} />
+                                </div>
+                                <div className="form-group">
+                                    <label>Precio</label>
+                                    <input type='text' className='form-control' required onChange={(e) => setPrecio(e.target.value)} />
+                                </div>
 
-                        </form>
+                                <div className='form-group'>
+                                    <button className='btn btn-primary' type='submit'>Guardar</button>
+                                </div>
+
+                            </form>
 
 
-                     </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
 
 
         </div>

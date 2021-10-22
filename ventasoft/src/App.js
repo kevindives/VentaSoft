@@ -10,7 +10,7 @@ import Ventas from './components/Ventas'
 import Productos from "./components/Productos"
 import ActualizarProd from "./components/ActualizarProd"
 import ActualizarVenta from './components/ActualizarVenta';
-import loginGoogle from './components/loginGoogle'
+// import loginGoogle from './components/loginGoogle'
 
 function App() {
   return (
@@ -25,7 +25,7 @@ function App() {
       <Route path='/productos' exact component={Productos}/>
       <Route path='/editProductos/:id' exact component={ActualizarProd}/>
       <Route path='/editVentas/:id' exact component={ActualizarVenta}/>
-      <Route path='/google' exact component={loginGoogle}/>
+      {/* <Route path='/google' exact component={loginGoogle}/> */}
      </Router>
 
 

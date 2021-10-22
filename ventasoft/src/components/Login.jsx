@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Axios from 'axios'
 import Swal from 'sweetalert2'
 import Nav from './Nav';
+import LoginGoogle from './loginGoogle';
 
 export default function Login() {
 
@@ -24,9 +25,13 @@ export default function Login() {
             const token = respuesta.data.token
             const nombre = respuesta.data.nombre
             const idusuario = respuesta.data.id
+            const estado = respuesta.data.estado
+            const rol = respuesta.data.rol
             sessionStorage.setItem('token', token)
             sessionStorage.setItem('nombre', nombre)
             sessionStorage.setItem('idusuario', idusuario)
+            sessionStorage.setItem('estado', estado)
+            sessionStorage.setItem('rol', rol)
             window.location.href = '/home'
         }
     }
@@ -56,6 +61,7 @@ export default function Login() {
                                         <input type="password" className='form-control' requires onChange={(e) => setContrasena(e.target.value)} />
                                     </div>
                                     <input type="submit" className='btn btn-primary btn-block' />
+                                    <LoginGoogle/>
 
 
                                 </form>
