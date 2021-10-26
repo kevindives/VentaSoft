@@ -27,7 +27,7 @@ export default function ActualizarProd(props) {
     const obtenerVendedores = async () => {
         const id = props.match.params.id
         const token = sessionStorage.getItem('token')
-        const respuesta = await Axios.get('http://localhost:4000/usuario/vervendedores/' + id, {
+        const respuesta = await Axios.get('/usuario/vervendedores/' + id, {
             headers: { 'autorizacion': token }
         })
         console.log(respuesta.data)
@@ -49,7 +49,7 @@ export default function ActualizarProd(props) {
             rol: rolselect
         }
 
-        const respuesta = await Axios.put('http://localhost:4000/usuario/modificar/' + id, vendedor, {
+        const respuesta = await Axios.put('/usuario/modificar/' + id, vendedor, {
             headers: { 'autorizacion': token }
         })
 

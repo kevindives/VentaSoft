@@ -32,7 +32,7 @@ export default function Index() {
     const obtenerVendedores = async () => {
         // const id = sessionStorage.getItem('idusuario')
         const token = sessionStorage.getItem('token')
-        const res =await Axios.get('http://localhost:4000/usuario/vervendedores',
+        const res =await Axios.get('/usuario/vervendedores',
             {
                 headers: { 'autorizacion': token }
             }
@@ -55,7 +55,7 @@ export default function Index() {
     /*Eliminar vendedor*/
     const eliminar=async(id)=>{
         const token=sessionStorage.getItem('token')
-        const respuesta=await Axios.delete('http://localhost:4000/usuario/borrar/'+id,{
+        const respuesta=await Axios.delete('/usuario/borrar/'+id,{
             headers:{'autorizacion':token}
         })
         const mensaje=respuesta.data.mensaje 
@@ -81,7 +81,7 @@ export default function Index() {
 
         const token = sessionStorage.getItem('token')
 
-        const respuesta = await Axios.post('http://localhost:4000/usuario/crear', usuario, {
+        const respuesta = await Axios.post('/usuario/crear', usuario, {
             headers: { 'autorizacion': token }
         })
 
@@ -106,7 +106,7 @@ export default function Index() {
         }
         const buscar = e.target.value
         const token = sessionStorage.getItem('token')
-        const respuesta = await Axios.get('http://localhost:4000/usuario/buscar/' + buscar, {
+        const respuesta = await Axios.get('/usuario/buscar/' + buscar, {
             headers: { 'autorizacion': token }
         })
         setVendedores(respuesta.data)

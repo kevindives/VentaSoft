@@ -12,14 +12,14 @@ function LoginGoogle() {
         // console.log(respuesta2.profileObj)
         const correo = respuesta2.profileObj.email
         const usuario = { correo }
-        const respuesta = await Axios.post('http://localhost:4000/usuario/loginGoogle', usuario)
+        const respuesta = await Axios.post('/usuario/loginGoogle', usuario)
         const mensaje = respuesta.data.mensaje
         if (mensaje !== 'Bienvenido') {
             const nombre = respuesta2.profileObj.name
             const correo = respuesta2.profileObj.email
             const contrasena =respuesta2.profileObj.email
             const usuario = { nombre, correo,contrasena }
-            const resp = await Axios.post('http://localhost:4000/usuario/crear', usuario)
+            const resp = await Axios.post('/usuario/crear', usuario)
             const menssage = resp.data.mensaje
             if (menssage !== 'Bienvenido') {
                 Swal.fire({

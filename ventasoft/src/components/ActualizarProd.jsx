@@ -22,7 +22,7 @@ export default function ActualizarProd (props) {
     const obtenerProductos = async () => {
         const id = props.match.params.id
         const token = sessionStorage.getItem('token')
-        const respuesta = await Axios.get('http://localhost:4000/producto/listarproducto/' + id, {
+        const respuesta = await Axios.get('/producto/listarproducto/' + id, {
             headers: { 'autorizacion': token }
         })
         console.log(respuesta.data)
@@ -47,7 +47,7 @@ export default function ActualizarProd (props) {
             precio
         }
 
-        const respuesta = await Axios.put('http://localhost:4000/producto/actualizar/' + id, producto, {
+        const respuesta = await Axios.put('/producto/actualizar/' + id, producto, {
             headers: { 'autorizacion': token }
         })
 

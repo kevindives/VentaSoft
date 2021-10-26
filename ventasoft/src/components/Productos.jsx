@@ -26,7 +26,7 @@ export default function Productos() {
     const obtenerProductos = async () => {
         // const id = sessionStorage.getItem('idusuario')
         const token = sessionStorage.getItem('token')
-        const res = await Axios.get('http://localhost:4000/producto/listarproducto',
+        const res = await Axios.get('/producto/listarproducto',
             {
                 headers: { 'autorizacion': token }
             }
@@ -38,7 +38,7 @@ export default function Productos() {
     /*Eliminar vendedor*/
     const eliminar = async (id) => {
         const token = sessionStorage.getItem('token')
-        const respuesta = await Axios.delete('http://localhost:4000/producto/eliminar/' + id, {
+        const respuesta = await Axios.delete('/producto/eliminar/' + id, {
             headers: { 'autorizacion': token }
         })
         const mensaje = respuesta.data.mensaje
@@ -64,7 +64,7 @@ export default function Productos() {
         const token = sessionStorage.getItem('token')
 
 
-        const respuesta = await Axios.post('http://localhost:4000/producto/crear', producto, {
+        const respuesta = await Axios.post('/producto/crear', producto, {
             headers: { 'autorizacion': token }
         })
 
@@ -89,7 +89,7 @@ export default function Productos() {
         }
         const buscar = e.target.value
         const token = sessionStorage.getItem('token')
-        const respuesta = await Axios.get('http://localhost:4000/producto/buscar/' + buscar, {
+        const respuesta = await Axios.get('/producto/buscar/' + buscar, {
             headers: { 'autorizacion': token }
         })
         setProductos(respuesta.data)

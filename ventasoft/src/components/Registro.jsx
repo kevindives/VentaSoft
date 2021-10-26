@@ -11,7 +11,7 @@ export const Registro = () => {
     const registro = async (e) => {
         e.preventDefault()
         const usuario = { nombre, correo, contrasena }
-        const respuesta = await Axios.post('http://localhost:4000/usuario/crear', usuario)
+        const respuesta = await Axios.post('/usuario/crear', usuario)
         const mensaje = respuesta.data.mensaje
         if (mensaje !== 'Bienvenido') {
             Swal.fire({
